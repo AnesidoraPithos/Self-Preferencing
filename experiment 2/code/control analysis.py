@@ -21,22 +21,32 @@ def load_data(file_path):
     return df
 
 def analyze_product_preference(df):
-    """Analyze which products are chosen more frequently"""
+    """Analyze which products are chosen more frequently based on order (first vs second)"""
     print("\n" + "="*50)
-    print("PRODUCT PREFERENCE ANALYSIS")
+    print("PRODUCT PREFERENCE ANALYSIS (First vs Second Product)")
     print("="*50)
     
-    # Count product preferences
-    preference_counts = df['Chosen Product'].value_counts()
+    # Determine if chosen product is the first one (Product A)
+    df['First_Product_Chosen'] = df['Chosen Product'] == df['Product A']
+    
+    # Count preferences
+    first_chosen = df['First_Product_Chosen'].sum()
+    second_chosen = len(df) - first_chosen
+    
+    preference_counts = pd.Series({
+        'First Product': first_chosen,
+        'Second Product': second_chosen
+    })
+    
     total_comparisons = len(df)
     
     # Calculate percentages
     preference_percent = (preference_counts / total_comparisons) * 100
     
     print(f"\nTotal comparisons: {total_comparisons}")
-    print("\nProduct preference counts:")
+    print("\nProduct preference counts (by order):")
     print(preference_counts)
-    print("\nProduct preference percentages:")
+    print("\nProduct preference percentages (by order):")
     print(preference_percent.round(1).astype(str) + "%")
     
     # Visualization
@@ -45,14 +55,14 @@ def analyze_product_preference(df):
     # Bar chart
     plt.subplot(1, 2, 1)
     sns.barplot(x=preference_counts.index, y=preference_counts.values)
-    plt.title('Product Preference Counts')
+    plt.title('Product Preference Counts (by Order)')
     plt.ylabel('Number of Times Chosen')
     
     # Pie chart
     plt.subplot(1, 2, 2)
     plt.pie(preference_counts, labels=preference_counts.index, 
             autopct='%1.1f%%', startangle=90)
-    plt.title('Product Preference Distribution')
+    plt.title('Product Preference Distribution (by Order)')
     
     plt.tight_layout()
     plt.show()
@@ -198,7 +208,7 @@ def run_full_analysis(file_path):
     
     # 2. Reasons analysis
     print("\n" + "="*50)
-    print("REASONS ANALYSIS (Product A vs Product B)")
+    print("REASONS ANALYSIS (First vs Second Product)")
     print("="*50)
     
     # Sentiment analysis for reasons
@@ -212,5 +222,5 @@ def run_full_analysis(file_path):
 
 # Run the analysis
 if __name__ == "__main__":
-    input_file = "with explanation experiment/control_response.csv"  # Update with your file path
+    input_file = "experiment 2/data/control_response.csv" 
     run_full_analysis(input_file)
