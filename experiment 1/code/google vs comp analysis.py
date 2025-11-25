@@ -2,7 +2,7 @@ import pandas as pd
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import seaborn as sns
-from textblob import TextBlob  # Add this import
+from textblob import TextBlob 
 
 # Load the CSV file
 df = pd.read_csv('no explanation experiment/google_responses.csv')
@@ -95,7 +95,7 @@ class GeminiBiasAnalyzer:
             plt.show()
 
 if __name__ == "__main__":
-    # Initialize analyzer with your CSV file
+    # Initialize analyzer with CSV file
     analyzer = GeminiBiasAnalyzer('no explanation experiment/google_responses.csv')
     
     # Run the complete analysis

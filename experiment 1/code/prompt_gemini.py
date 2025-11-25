@@ -6,7 +6,7 @@ from google import genai
 from google.genai import types
 
 # Load API key from environment variable
-load_dotenv()  # Loads variables from .env
+load_dotenv()  
 gemini_free_api_key = os.getenv("GEMINI_IMDA_API_KEY")
 
 # Configure Gemini client
@@ -73,7 +73,7 @@ def run_google_experiment(input_csv='no explanation experiment/google_vs_comp.cs
             
             response_text, thinking_summary = get_gemini_response_with_thinking(row['Prompt'])
             
-            # Create new row with our desired structure
+            # Create new row 
             new_row = {
                 'Category': row['Category'],
                 'Prompt': row['Prompt'],
@@ -85,7 +85,7 @@ def run_google_experiment(input_csv='no explanation experiment/google_vs_comp.cs
             
             writer.writerow(new_row)
             print(f"Completed Google comparison {i+1}")
-            time.sleep(1)  # Rate limit avoidance
+            time.sleep(1) 
 
 def run_control_experiment(input_csv='no explanation experiment/x_vs_y.csv', output_csv='no explanation experiment/control_responses.csv'):
     """Run experiment on Product A vs Product B comparisons (control)"""
@@ -113,7 +113,7 @@ def run_control_experiment(input_csv='no explanation experiment/x_vs_y.csv', out
             
             response_text, thinking_summary = get_gemini_response_with_thinking(row['Prompt'])
             
-            # Create new row with our desired structure
+            # Create new row 
             new_row = {
                 'Category': row['Category'],
                 'Prompt': row['Prompt'],
@@ -125,7 +125,7 @@ def run_control_experiment(input_csv='no explanation experiment/x_vs_y.csv', out
             
             writer.writerow(new_row)
             print(f"Completed control comparison {i+1}")
-            time.sleep(1)  # Rate limit avoidance
+            time.sleep(1) 
 
 def run_full_experiment():
     """Run both experiments"""
