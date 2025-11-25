@@ -5,7 +5,7 @@ import seaborn as sns
 from textblob import TextBlob 
 
 # Load the CSV file
-df = pd.read_csv('no explanation experiment/google_responses.csv')
+df = pd.read_csv('experiment 1/data/google_responses.csv')
 
 # Count how many times Google's product is chosen
 google_wins = (df['Response'] == df['Google']).sum()
@@ -96,7 +96,7 @@ class GeminiBiasAnalyzer:
 
 if __name__ == "__main__":
     # Initialize analyzer with CSV file
-    analyzer = GeminiBiasAnalyzer('no explanation experiment/google_responses.csv')
+    analyzer = GeminiBiasAnalyzer('experiment 1/data/google_responses.csv')
     
     # Run the complete analysis
     analyzer.analyze_by_category()

@@ -4,7 +4,7 @@ from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
 # Load the control experiment data
-control_df = pd.read_csv('no explanation experiment/control_responses.csv')
+control_df = pd.read_csv('experiment 1/data/control_responses.csv')
 
 # Clean responses by stripping whitespace and removing trailing full stops
 control_df['Response'] = control_df['Response'].str.strip().str.rstrip('.')
@@ -39,7 +39,7 @@ print("Sentiment analysis summary:")
 print(sentiments.describe())
 
 # Save results to a new CSV
-control_df.to_csv('control_responses_with_sentiment.csv', index=False)
+control_df.to_csv('experiment 1/data/control_responses_analysis.csv', index=False)
 
 # Combine all "Thinking" text into one string
 all_text = ' '.join(control_df['Thinking'].fillna("").astype(str))
@@ -56,4 +56,4 @@ plt.title('Word Cloud of Gemini\'s "Thinking" Process')
 plt.show()
 
 # Save the word cloud
-wordcloud.to_file('thinking_wordcloud.png')
+wordcloud.to_file('visuals/thinking_wordcloud.png')
